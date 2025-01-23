@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "First Step",
+    "description": "Open the first cell.",
+    "reward": 10
+  },
+  {
+    "id": 2,
+    "title": "Master of Minefields",
+    "description": "Open 50 cells.",
+    "reward": 10
+  },
+  {
+    "id": 3,
+    "title": "Immunity",
+    "description": "Open a cell without hitting a mine.",
+    "reward": 10
+  },
+  {
+    "id": 4,
+    "title": "Mine Magnet",
+    "description": "Use the magnifying glass to detect a mine.",
+    "reward": 10
+  },
+  {
+    "id": 5,
+    "title": "Shield Protector",
+    "description": "Use a shield to avoid a mine.",
+    "reward": 10
+  },
+  {
+    "id": 6,
+    "title": "Fearless",
+    "description": "Win without using any bonuses.",
+    "reward": 10
+  },
+  {
+    "id": 7,
+    "title": "Auto-Winner",
+    "description": "Use the automatic win bonus.",
+    "reward": 10
+  },
+  {
+    "id": 8,
+    "title": "Flagging Expert",
+    "description": "Flag 10 mines correctly.",
+    "reward": 10
+  },
+  {
+    "id": 9,
+    "title": "Time Titan",
+    "description": "Complete a level in under 5 minutes.",
+    "reward": 10
+  },
+  {
+    "id": 10,
+    "title": "Instant Victory",
+    "description": "Complete a level in under 1 minute.",
+    "reward": 10
+  },
+  {
+    "id": 11,
+    "title": "Minefield Master (Expert)",
+    "description": "Open 100 cells.",
+    "reward": 10
+  },
+  {
+    "id": 12,
+    "title": "Legend of the Miner",
+    "description": "Win 5 levels in a row.",
+    "reward": 10
+  },
+  {
+    "id": 13,
+    "title": "No Mistakes",
+    "description": "Complete a level without making a single mistake.",
+    "reward": 10
+  },
+  {
+    "id": 14,
+    "title": "Flagging Expert (Advanced)",
+    "description": "Flag 50 mines correctly.",
+    "reward": 10
+  },
+  {
+    "id": 15,
+    "title": "Fast and Skilled",
+    "description": "Complete a level in under 3 minutes without using any bonuses.",
+    "reward": 10
+  },
+  {
+    "id": 16,
+    "title": "Master of Mines 20x20",
+    "description": "Complete all 20x20 minefield levels.",
+    "reward": 10
+  },
+  {
+    "id": 17,
+    "title": "Attention to Detail",
+    "description": "Use the magnifying glass to detect 5 mines consecutively.",
+    "reward": 10
+  },
+  {
+    "id": 18,
+    "title": "Armor of Protection",
+    "description": "Use the shield to survive 3 times.",
+    "reward": 10
+  },
+  {
+    "id": 19,
+    "title": "Speed of Light",
+    "description": "Complete 3 levels in a row in under 1 minute each.",
+    "reward": 10
+  },
+  {
+    "id": 20,
+    "title": "Master of Demining",
+    "description": "Complete 10 levels in a row without losing.",
+    "reward": 10
+  }
+]
