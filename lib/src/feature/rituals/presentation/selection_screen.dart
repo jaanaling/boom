@@ -160,7 +160,7 @@ Future<void> _showDialog(BuildContext context, bool lock) async {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Purple',
-                          fontSize: 27,
+                          fontSize: lock? 27:22,
                           color: Colors.white,
                         ),
                       ),

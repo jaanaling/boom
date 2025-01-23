@@ -933,13 +933,11 @@ class _MinesweeperGameState extends State<GameScreen> {
 
     // Если раскрыта, но не мина
     if (cell.adjacentMines > 0) {
-      return Text(
-        cell.adjacentMines.toString(),
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
+      return TextWithBorder(cell.adjacentMines.toString(),
+          fontSize: 37,
+          fontFamily: 'One',
           color: _getNumberColor(cell.adjacentMines),
-        ),
-      );
+          borderColor: Colors.black);
     }
 
     // 0 мин вокруг – пустая ячейка

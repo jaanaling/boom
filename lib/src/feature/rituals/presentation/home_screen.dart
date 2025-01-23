@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
         }
         return SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding:
@@ -51,6 +50,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              Spacer(),
               AppButton(
                 width: getWidth(context, percent: 0.8),
                 height: 110,
@@ -122,10 +122,8 @@ class HomeScreen extends StatelessWidget {
                   AppButton(
                     width: getWidth(context, percent: 0.3),
                     height: 59,
-                    onPressed: () {
-                      if (state.user.coins > 0) {
-                        return;
-                      }
+                    isGrey: state.user.coins > 0,
+                    onPressed: state.user.coins > 0? null: () {
                       context.read<UserBloc>().add(UserAddCoins(30));
                     },
                     child: const TextWithBorder(
@@ -208,6 +206,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              Spacer()
             ],
           ),
         );
@@ -241,9 +240,12 @@ class CoinsRow extends StatelessWidget {
             Spacer(
               flex: 2,
             ),
-            Text(
-              coins.toString(),
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 3),
+              child: Text(
+                coins.toString(),
+                textAlign: TextAlign.center,
+              ),
             ),
             Spacer(
               flex: 1,

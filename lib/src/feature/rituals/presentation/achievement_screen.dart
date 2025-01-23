@@ -69,6 +69,7 @@ class _AchievementScreenState extends State<AchievementScreen> {
                         return AppButton(
                           width: getWidth(context, percent: 0.3),
                           height: getWidth(context, percent: 0.3),
+                          isGreen: state.user.achievements.contains(state.achievements[index].id),
                           onPressed: () {
                             setState(() {
                               text = state.achievements[index].description;
@@ -84,17 +85,35 @@ class _AchievementScreenState extends State<AchievementScreen> {
                         );
                       }),
                     ),
-                     SizedBox(height: getHeight(context, percent: 0.3)),
+                    if(text.isNotEmpty)
+                    Opacity(
+                      opacity: 0,
+                      child: SizedBox(
+                        width: getWidth(context, percent: 1),
+                        child: Container(
+                          color: Colors.white.withOpacity(0.7),
+                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 22),
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                            child: TextWithBorder(text, fontSize: 32,),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
+            if(text.isNotEmpty)
             SizedBox(
              width: getWidth(context, percent: 1),
               child: Container(
                 color: Colors.white.withOpacity(0.7),
-                padding: const EdgeInsets.all(12),
-                child: TextWithBorder(text),
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 22),
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                  child: TextWithBorder(text, fontSize: 32,),
+                ),
               ),
             ),
           ],
