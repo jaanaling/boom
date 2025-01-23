@@ -60,7 +60,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       coins: newCoins,
       levels: levels,
     );
-
+userRepository.save(newUser);
     emit(current.copyWith(user: newUser));
 
     checkAndUnlockAchievements(newUser, event.openedCells, event.flagsPlaced,
@@ -93,7 +93,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       achievements: newAchievements,
       coins: newCoins,
     );
-
+userRepository.save(newUser);
     emit(current.copyWith(user: newUser));
   }
 
@@ -101,6 +101,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (state is! UserLoaded) return;
     final current = state as UserLoaded;
     final newUser = current.user.copyWith(coins: current.user.coins + event.coins);
+    userRepository.save(newUser);
     emit(current.copyWith(user: newUser));
   }
 
@@ -108,6 +109,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (state is! UserLoaded) return;
     final current = state as UserLoaded;
     final newUser = current.user.copyWith(coins: current.user.coins - event.coins);
+    userRepository.save(newUser);
     emit(current.copyWith(user: newUser));
   }
 

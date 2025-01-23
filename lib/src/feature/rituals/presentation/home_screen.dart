@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   context.push(
                       '${RouteValue.home.path}/${RouteValue.select.path}/${RouteValue.game.path}',
-                      extra: 30);
+                      extra: 15);
                 },
                 child: const TextWithBorder('DAILY'),
               ),

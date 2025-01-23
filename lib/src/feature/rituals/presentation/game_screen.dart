@@ -56,6 +56,7 @@ class _MinesweeperGameState extends State<GameScreen> {
 
   /// Итоговая оценка (1..5)
   int? _finalRating;
+  List<List<String>> colors = [];
 
   /// Размер клетки в пикселях (фиксированный)
   static const double cellSize = 60.0;
@@ -72,10 +73,10 @@ class _MinesweeperGameState extends State<GameScreen> {
     _gameWon = false;
     _finalRating = null;
 
-    // Сбрасываем бонусы
-    _shieldActive = true;
-    _magnifierAvailable = true;
-    _autoWinAvailable = true;
+    colors = List.generate(
+        widget.size,
+       (int) =>  List.generate(widget.size,
+            (int) => 'assets/images/balloon${Random().nextInt(5)}.png'));
 
     // Вычисляем кол-во мин (примерно 15% от всех клеток)
     _mineCount = (widget.size * widget.size * 0.15).floor();
@@ -885,7 +886,7 @@ class _MinesweeperGameState extends State<GameScreen> {
                         image: !cell.isRevealed
                             ? DecorationImage(
                                 image: AssetImage(
-                                  IconProvider.balloon.buildImageUrl(),
+                                  colors[row][col],
                                 ),
                                 fit: BoxFit.fitHeight,
                                 colorFilter: cell.isFlagged
