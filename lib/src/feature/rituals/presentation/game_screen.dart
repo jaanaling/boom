@@ -353,20 +353,21 @@ class _MinesweeperGameState extends State<GameScreen> {
         return Dialog(
           backgroundColor: Colors.transparent,
           child: SizedBox(
-            height: !_gameWon ? 200 : 410,
-            width: 450,
+            height: !_gameWon ? 273 : 456,
+            width: 327,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20, top: 10),
                   child: Container(
-                    height: !_gameWon ? 150 : 350,
-                    width: 450,
+                    height: !_gameWon ? 233 : 426,
+                    width: 327,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(IconProvider.panel.buildImageUrl()),
-                        fit: BoxFit.fill,
+                        image: AssetImage(_gameWon
+                            ? IconProvider.panel.buildImageUrl()
+                            : IconProvider.level.buildImageUrl()),
                       ),
                     ),
                     child: Padding(
@@ -416,8 +417,7 @@ class _MinesweeperGameState extends State<GameScreen> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: AppButton(
-                    width: getWidth(context, percent: 0.5),
-                    height: 59,
+                    color: ButtonColors.green,
                     onPressed: () {
                       if (_gameWon) {
                         context
@@ -476,18 +476,17 @@ class _MinesweeperGameState extends State<GameScreen> {
         return Dialog(
           backgroundColor: Colors.transparent,
           child: SizedBox(
-            height: 350,
-            width: 450,
+            width: 327,
+            height: 456,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Container(
-                  height: 310,
-                  width: 450,
+                  width: 327,
+                  height: 406,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(IconProvider.panel.buildImageUrl()),
-                      fit: BoxFit.fill,
                     ),
                   ),
                   child: Padding(
@@ -512,12 +511,12 @@ class _MinesweeperGameState extends State<GameScreen> {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Row(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       AppButton(
-                        width: getWidth(context, percent: 0.3),
-                        height: 59,
+                        color: ButtonColors.green,
                         onPressed: () {
                           context.pop();
                         },
@@ -526,9 +525,9 @@ class _MinesweeperGameState extends State<GameScreen> {
                           fontSize: 15,
                         ),
                       ),
+                      Gap(5),
                       AppButton(
-                        width: getWidth(context, percent: 0.3),
-                        height: 59,
+                        color: ButtonColors.green,
                         onPressed: () {
                           onConfirm();
                           context.pop();
@@ -567,8 +566,7 @@ class _MinesweeperGameState extends State<GameScreen> {
                     Row(
                       children: [
                         AppButton(
-                          width: 58,
-                          height: 58,
+                          color: ButtonColors.purple,
                           onPressed: () {
                             context.pop();
                           },
@@ -580,8 +578,7 @@ class _MinesweeperGameState extends State<GameScreen> {
                         ),
                         const Gap(10),
                         AppButton(
-                          width: 58,
-                          height: 58,
+                          color: ButtonColors.purple,
                           onPressed: () {
                             _startNewGame();
                           },
@@ -659,18 +656,17 @@ class _MinesweeperGameState extends State<GameScreen> {
         return Dialog(
           backgroundColor: Colors.transparent,
           child: SizedBox(
-            height: 300,
-            width: 450,
+            width: 327,
+            height: 273,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Container(
-                  height: 250,
-                  width: 450,
+                  width: 327,
+                  height: 233,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(IconProvider.panel.buildImageUrl()),
-                      fit: BoxFit.fill,
+                      image: AssetImage(IconProvider.level.buildImageUrl()),
                     ),
                   ),
                   child: Padding(
@@ -696,8 +692,7 @@ class _MinesweeperGameState extends State<GameScreen> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: AppButton(
-                    width: getWidth(context, percent: 0.3),
-                    height: 59,
+                    color: ButtonColors.green,
                     onPressed: () {
                       context.pop();
                     },
@@ -723,18 +718,17 @@ class _MinesweeperGameState extends State<GameScreen> {
         return Dialog(
           backgroundColor: Colors.transparent,
           child: SizedBox(
-            height: 300,
-            width: 450,
+            width: 327,
+            height: 273,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Container(
-                  height: 250,
-                  width: 450,
+                  width: 327,
+                  height: 233,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(IconProvider.panel.buildImageUrl()),
-                      fit: BoxFit.fill,
+                      image: AssetImage(IconProvider.level.buildImageUrl()),
                     ),
                   ),
                   child: Padding(
@@ -760,8 +754,7 @@ class _MinesweeperGameState extends State<GameScreen> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: AppButton(
-                    width: getWidth(context, percent: 0.3),
-                    height: 59,
+                    color: ButtonColors.green,
                     onPressed: () {
                       context.pop();
                     },

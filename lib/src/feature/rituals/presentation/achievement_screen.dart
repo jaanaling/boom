@@ -38,8 +38,7 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       child: Row(
                         children: [
                           AppButton(
-                            width: 58,
-                            height: 58,
+                            color: ButtonColors.purple,
                             onPressed: () {
                               context.pop();
                             },
@@ -67,9 +66,7 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       children:
                           List.generate(state.achievements.length, (index) {
                         return AppButton(
-                          width: getWidth(context, percent: 0.3),
-                          height: getWidth(context, percent: 0.3),
-                          isGreen: state.user.achievements.contains(state.achievements[index].id),
+                          color: state.user.achievements.contains(state.achievements[index].id)? ButtonColors.fGreen:ButtonColors.pink,
                           onPressed: () {
                             setState(() {
                               text = state.achievements[index].description;

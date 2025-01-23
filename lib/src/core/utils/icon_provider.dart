@@ -16,7 +16,11 @@ enum IconProvider {
   lock(imageName: 'lock.png'),
   time(imageName: 'time.png'),
   panel(imageName: 'panel.png'),
-  btn1(imageName: 'btn1.png'),
+  btn1(imageName: 'big_button.png'),
+  smallButton(imageName: 'small_button.png'),
+  greenButton(imageName: 'green_button.png'),
+  starGrey(imageName: 'star_grey.png'),
+  level(imageName: 'level.png'),
 
   unknown(imageName: '');
 

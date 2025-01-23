@@ -32,8 +32,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppButton(
-                      width: 58,
-                      height: 58,
+                      color: ButtonColors.purple,
                       onPressed: () {
                         context.push(
                             '${RouteValue.home.path}/${RouteValue.achievement.path}');
@@ -52,8 +51,8 @@ class HomeScreen extends StatelessWidget {
               ),
               Spacer(),
               AppButton(
-                width: getWidth(context, percent: 0.8),
-                height: 110,
+                color: ButtonColors.pink,
+                isBig: true,
                 onPressed: () {
                   context.push(
                       '${RouteValue.home.path}/${RouteValue.select.path}');
@@ -62,8 +61,8 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               AppButton(
-                width: getWidth(context, percent: 0.8),
-                height: 110,
+                color: ButtonColors.orange,
+                isBig: true,
                 onPressed: () {
                   context.push(
                       '${RouteValue.home.path}/${RouteValue.select.path}/${RouteValue.game.path}',
@@ -120,9 +119,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   AppButton(
-                    width: getWidth(context, percent: 0.3),
-                    height: 59,
-                    isGrey: state.user.coins > 0,
+                    isLong: state.user.coins > 0,
+                    color:  state.user.coins > 0?ButtonColors.grey:ButtonColors.green,
                     onPressed: state.user.coins > 0? null: () {
                       context.read<UserBloc>().add(UserAddCoins(30));
                     },

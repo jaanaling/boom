@@ -30,8 +30,7 @@ class SelectionScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppButton(
-                        width: 58,
-                        height: 58,
+                        color: ButtonColors.purple,
                         onPressed: () {
                           context.pop();
                         },
@@ -57,8 +56,7 @@ class SelectionScreen extends StatelessWidget {
                       crossAxisSpacing: 16,
                       children: List.generate(250, (index) {
                         return AppButton(
-                          width: getWidth(context, percent: 0.3),
-                          height: getWidth(context, percent: 0.3),
+                          color: ButtonColors.pink,
                           onPressed: () {
                             if (state.user.levels
                                     .map((toElement) => toElement.id)
@@ -132,18 +130,17 @@ Future<void> _showDialog(BuildContext context, bool lock) async {
       return Dialog(
         backgroundColor: Colors.transparent,
         child: SizedBox(
-          height: 300,
-          width: 450,
+          width: 327,
+          height: 273,
           child: Stack(
             alignment: Alignment.center,
             children: [
               Container(
-                height: 250,
-                width: 450,
+                width: 327,
+                height: 233,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(IconProvider.panel.buildImageUrl()),
-                    fit: BoxFit.fill,
+                    image: AssetImage(IconProvider.level.buildImageUrl()),
                   ),
                 ),
                 child: Padding(
@@ -171,8 +168,7 @@ Future<void> _showDialog(BuildContext context, bool lock) async {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: AppButton(
-                  width: getWidth(context, percent: 0.3),
-                  height: 59,
+                  color: ButtonColors.green,
                   onPressed: () {
                     context.pop();
                   },
@@ -206,52 +202,42 @@ class Star extends StatelessWidget {
         Transform(
           transform: Matrix4.identity()
             ..rotateZ(0.0), // Без вращения для первого элемента
-          child: AppIcon(
-            asset: IconProvider.star.buildImageUrl(),
+          child:  AppIcon(
+            asset: score > 0? IconProvider.star.buildImageUrl():IconProvider.starGrey.buildImageUrl(),
             width: size - 13.27,
             height: size - 13.27,
-            color: score > 0 ? null : Colors.black.withOpacity(0.5),
-            blendMode: BlendMode.srcATop,
           ),
         ),
         Transform(
           transform: Matrix4.identity()
             ..rotateZ(0.05), // Меньшее вращение для второго элемента
           child: AppIcon(
-            asset: IconProvider.star.buildImageUrl(),
+            asset: score > 1? IconProvider.star.buildImageUrl():IconProvider.starGrey.buildImageUrl(),
             width: size - 6.19,
             height: size - 6.19,
-            color: score > 1 ? null : Colors.black.withOpacity(0.5),
-            blendMode: BlendMode.srcATop,
           ),
         ),
         AppIcon(
-          asset: IconProvider.star.buildImageUrl(),
+          asset: score > 2? IconProvider.star.buildImageUrl():IconProvider.starGrey.buildImageUrl(),
           width: size,
           height: size,
-          color: score > 2 ? null : Colors.black.withOpacity(0.5),
-          blendMode: BlendMode.srcATop,
         ),
         Transform(
           transform: Matrix4.identity()
             ..rotateZ(-0.05), // Меньше вращения для четвертого элемента
           child: AppIcon(
-            asset: IconProvider.star.buildImageUrl(),
+            asset: score > 3? IconProvider.star.buildImageUrl():IconProvider.starGrey.buildImageUrl(),
             width: size - 6.19,
             height: size - 6.19,
-            color: score > 3 ? null : Colors.black.withOpacity(0.5),
-            blendMode: BlendMode.srcATop,
           ),
         ),
         Transform(
           transform: Matrix4.identity()
             ..rotateZ(0.0), // Без вращения для пятого элемента
           child: AppIcon(
-            asset: IconProvider.star.buildImageUrl(),
+            asset: score > 4? IconProvider.star.buildImageUrl():IconProvider.starGrey.buildImageUrl(),
             width: size - 13.27,
             height: size - 13.27,
-            color: score > 4 ? null : Colors.black.withOpacity(0.5),
-            blendMode: BlendMode.srcATop,
           ),
         ),
       ],
