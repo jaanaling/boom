@@ -36,6 +36,7 @@ class _MinesweeperGameState extends State<GameScreen> {
   int flagsPlaced = 0;
   bool usedShield = false;
   bool usedMagnifier = false;
+  bool usedAutowin = false;
 
   /// Количество мин
   late int _mineCount;
@@ -46,8 +47,6 @@ class _MinesweeperGameState extends State<GameScreen> {
 
   /// Бонусы
   bool _shieldActive = true;
-  bool _magnifierAvailable = true;
-  bool _autoWinAvailable = true;
 
   /// Таймер (обратный отсчёт)
   Timer? _timer;
@@ -64,7 +63,83 @@ class _MinesweeperGameState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showTutorialDialog();
+    });
+
     _startNewGame();
+  }
+
+  /// Показать кастомный диалог с обучением саперу
+  void _showTutorialDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: SizedBox(
+            height: 456,
+            width: 327,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 406,
+                  width: 327,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(IconProvider.panel.buildImageUrl()),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 48,
+                    ),
+                    child: Column(
+                      children: const [
+                        Text(
+                          'Tutorial',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Purple',
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Gap(20),
+                        Text(
+                          'Tap on a cell to reveal it. If it contains a mine, you lose unless you have an active shield.\n\nLong press on a cell to place or remove a flag. Flags mark cells you suspect contain mines.\n\nNumbers on revealed cells indicate how many mines are adjacent to that cell.\n\nUse boosters to help you win!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Purple',
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: AppButton(
+                    color: ButtonColors.green,
+                    onPressed: () {
+                      context.pop();
+                    },
+                    child: const TextWithBorder(
+                      'OK',
+                      fontSize: 30,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   /// Начинаем новую игру
@@ -75,7 +150,7 @@ class _MinesweeperGameState extends State<GameScreen> {
 
     colors = List.generate(
         widget.size,
-       (int) =>  List.generate(widget.size,
+        (int) => List.generate(widget.size,
             (int) => 'assets/images/balloon${Random().nextInt(5)}.png'));
 
     // Вычисляем кол-во мин (примерно 15% от всех клеток)
@@ -299,7 +374,7 @@ class _MinesweeperGameState extends State<GameScreen> {
 
   /// Использование лупы (показать одну нераскрытую/нефлагнутую мину)
   void _useMagnifier() {
-    if (!_magnifierAvailable || _gameOver || _gameWon) return;
+    if (_gameOver || _gameWon) return;
 
     // Находим нераскрытые и не помеченные мины
     final List<Cell> hiddenMines = [];
@@ -328,10 +403,11 @@ class _MinesweeperGameState extends State<GameScreen> {
 
   /// Использование авто-победы
   void _useAutoWin() {
-    if (!_autoWinAvailable || _gameOver || _gameWon) return;
+    if (_gameOver || _gameWon) return;
     setState(() {
       context.read<UserBloc>().add(UserRemoveCoins(50));
-      _autoWinAvailable = false;
+      usedAutowin = true;
+
       _gameWon = true;
       // Раскрываем всё поле
       for (var row in _board) {
@@ -339,9 +415,20 @@ class _MinesweeperGameState extends State<GameScreen> {
           cell.isRevealed = true;
         }
       }
+      _calculateRating();
 
       _stopTimer();
-      _calculateRating();
+      context.read<UserBloc>().add(
+            UserPuzzleSolved(
+              isCorrect: _gameWon,
+              score: _finalRating!,
+              openedCells: openedCells,
+              flagsPlaced: flagsPlaced,
+              usedShield: usedShield,
+              usedMagnifier: usedMagnifier,
+              timeSpent: _totalTime - _timeLeft,
+            ),
+          );
     });
   }
 
@@ -529,8 +616,8 @@ class _MinesweeperGameState extends State<GameScreen> {
                       AppButton(
                         color: ButtonColors.green,
                         onPressed: () {
-                          onConfirm();
                           context.pop();
+                          onConfirm();
                         },
                         child: const TextWithBorder(
                           'CONFIRM',
