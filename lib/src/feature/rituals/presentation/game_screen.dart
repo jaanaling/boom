@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../ui_kit/animated_button.dart';
+
 /// Экран игры
 class GameScreen extends StatefulWidget {
   /// Поле size x size (например, size=10 => поле 10x10)
@@ -898,37 +900,37 @@ class _MinesweeperGameState extends State<GameScreen> {
     );
   }
 
-  GestureDetector bosterBuild(VoidCallback? func, String text, String asset) {
-    return GestureDetector(
-      onTap: func,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              TextWithBorder(
-                text,
-                fontSize: 30,
+  Widget bosterBuild(VoidCallback? func, String text, String asset) {
+    final content = Column(
+      children: [
+        Row(
+          children: [
+            TextWithBorder(
+              text,
+              fontSize: 30,
+            ),
+            const Gap(10),
+            Transform(
+              transform: Matrix4.identity()
+                ..translate(0.0)
+                ..rotateZ(0.26),
+              child: AppIcon(
+                asset: IconProvider.coins.buildImageUrl(),
+                width: 30,
               ),
-              const Gap(10),
-              Transform(
-                transform: Matrix4.identity()
-                  ..translate(0.0)
-                  ..rotateZ(0.26),
-                child: AppIcon(
-                  asset: IconProvider.coins.buildImageUrl(),
-                  width: 30,
-                ),
-              ),
-            ],
-          ),
-          const Gap(15),
-          AppIcon(
-            asset: asset,
-            width: 70,
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        const Gap(15),
+        AppIcon(
+          asset: asset,
+          width: 70,
+        ),
+      ],
     );
+    return func != null
+        ? AnimatedButton(onPressed: func, child: content)
+        : content;
   }
 
   /// Построение поля с фиксированным размером клеток и скроллом в обе стороны
@@ -957,9 +959,9 @@ class _MinesweeperGameState extends State<GameScreen> {
                   final row = index ~/ size;
                   final col = index % size;
                   final cell = _board[row][col];
-                  return GestureDetector(
-                    onTap: () => _revealCell(row, col),
-                    onLongPress: () => _toggleFlag(row, col),
+                  return AnimatedButton(
+                    onPressed: () => _revealCell(row, col),
+                    onLongPressed: () => _toggleFlag(row, col),
                     child: Container(
                       margin: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
